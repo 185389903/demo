@@ -3,7 +3,7 @@
 	var v=jsV[0].getAttribute("src").split("?")[1];
 	seajs.config({
 		paths: {
-		  'globalPath': 'https://185389903.github.io/demo/static/js'
+		  'globalPath': 'https://185389903.github.io/demo/static/dist/js'
 		},
 	 	alias: { 
 	 		// 库模块，如果没有经过模块化的插件一定要用require.async异步加载
