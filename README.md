@@ -10,7 +10,7 @@ package.json 插件安装表文件
 
 
 
-开发时打包会生成
+<pre>开发时打包会生成
 node_modules (这个不变)
 dist (运行gulp时生成的和src对比的副本，为了监听源文件的更改 有针对性的版本号更新，提高打包速度)
 src (这个后台模板源文件里用到的img css js会自动添加版本号)
@@ -51,3 +51,4 @@ seajs下的模块依赖会在这个配置下寻找依赖路劲，避免使用相
 paths: {
   'globalPath': 'http://127.0.0.1:8020/www/gulp-twig-test/static/dist/js'
 }
+</pre>
