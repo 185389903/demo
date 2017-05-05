@@ -1,0 +1,1 @@
+define(function(require,exports,module){var $=require("jquery"),n={init:function(){console.log($("img").attr("src")),alert("我是专门处理弹框。")}};exports.alert=n});

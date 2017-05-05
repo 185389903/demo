@@ -1,0 +1,1 @@
+define(function(require,exports,module){var t=(require("jquery"),{init:function(){alert("我是about-alert模块")}});exports.aboutAlert=t});

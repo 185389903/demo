@@ -1,0 +1,1 @@
+define(function(require,exports,module){var $=require("jquery");require("main").main.init(),require("index-nav").nav.init();var n={init:function(){console.log($("body").html()),require.async("index-alert",function(n){n.alert.init()}),require.async("jqueryCookie",function(){$.cookie("name","txp")})}};n.init(),exports.index=n});

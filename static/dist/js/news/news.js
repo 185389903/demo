@@ -1,0 +1,1 @@
+define(function(require,exports,module){require("jquery");require("main").main.init();var n={init:function(){require("news-alert").newsAlert.init()}};n.init(),exports.news=n});

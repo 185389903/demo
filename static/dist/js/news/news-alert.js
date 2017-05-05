@@ -1,0 +1,1 @@
+define(function(require,exports,module){var e=(require("jquery"),{init:function(){alert("我是news-alert模块")}});exports.newsAlert=e});

@@ -1,0 +1,1 @@
+define(function(require,exports,module){var n=(require("jquery"),{init:function(){alert("公共模块js")}});exports.main=n});
