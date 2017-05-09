@@ -48,6 +48,24 @@ var REGConfig={
 		// 更改文件后再次生成最新文件到DEST目录中，如果再次修改"./page/"下的文件会和DEST目录下的进行对比，有改动的文件生成替换
 		.pipe(gulp.dest(DEST))	
 	},
+	imgChange:function(imgPath){
+		var ts=this;
+		var code=randomCode();
+		var imgPathArr=imgPath.split(".");
+		var REG=new RegExp("("+imgPathArr[0]+")"+"{1}\\.{1}"+"("+imgPathArr[1]+")"+"{1}\\?*(v)*=*([0-9a-zA-Z]|\\.|_)*","g");
+		
+		gulp.src(DIR)     //该任务针对的文件
+	    .pipe(replace(REG,imgPath+'?v='+code))      //该任务调用的模块
+	    // 源文件源目录输出
+		.pipe(gulp.dest(SRC))
+		.on("end",ts.imgChangeTwigCopy)
+		
+	},
+	imgChangeTwigCopy:function(){
+		gulp.src(DIR)     //该任务针对的文件
+		.pipe(changed(DEST))
+		.pipe(gulp.dest(DEST))	
+	},
 	twigRelease:function(DIR,SRC,DEST){
 		var ts=this;
 		var code=randomCode();
@@ -87,6 +105,7 @@ var REGConfig={
 	}
 };
 
+
 gulp.task("twigWatch",function(){
 	REGConfig.twigChange(DIR,SRC,DEST);
 });
@@ -121,6 +140,23 @@ gulp.task("watch",function(){
 	*/
 	gulp.watch('static/less/global/*.less',['mainLess']);
     gulp.watch('static/less/other/*.less',['staticLessCompile']);
+
+    // 对图片做出改动模板中图片的版本替换
+    // gulp.watch("static/img/**/*.png",function(event) {
+    //   var fileArr=event.path.split("\\");
+    //   var fileName=fileArr[fileArr.length-1];
+    //   REGConfig.imgChange(fileName);
+    // });
+    // gulp.watch("static/img/**/*.jpg",function(event) {
+    //   var fileArr=event.path.split("\\");
+    //   var fileName=fileArr[fileArr.length-1];
+    //   REGConfig.imgChange(fileName);
+    // });
+    // gulp.watch("static/img/**/*.gif",function(event) {
+    //   var fileArr=event.path.split("\\");
+    //   var fileName=fileArr[fileArr.length-1];
+    //   REGConfig.imgChange(fileName);
+    // });
 });
 
 
@@ -166,9 +202,10 @@ gulp.task('staticLessCompile',function(){
 });
 gulp.task('mainLess',function(){
 
-    return gulp.src('static/less/global/main.less')
+    return gulp.src('static/less/global/main.less',{sourcemap:true})
 
     // 调用less插件编译less文件
+
     .pipe(less())
 
     // 压缩css
@@ -185,4 +222,23 @@ gulp.task('mainLess',function(){
 gulp.task('watchLess', function () {
     gulp.watch('static/less/global/*.less',['mainLess']);
     gulp.watch('static/less/other/*.less',['staticLessCompile']);
+});
+
+// 对图片做出改动模板中图片的版本替换
+gulp.task("imgWatch",function(){
+	gulp.watch("static/img/**/*.png",function(event) {
+      var fileArr=event.path.split("\\");
+      var fileName=fileArr[fileArr.length-1];
+      REGConfig.imgChange(fileName);
+    });
+    gulp.watch("static/img/**/*.jpg",function(event) {
+      var fileArr=event.path.split("\\");
+      var fileName=fileArr[fileArr.length-1];
+      REGConfig.imgChange(fileName);
+    });
+    gulp.watch("static/img/**/*.gif",function(event) {
+      var fileArr=event.path.split("\\");
+      var fileName=fileArr[fileArr.length-1];
+      REGConfig.imgChange(fileName);
+    });
 });
