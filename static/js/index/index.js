@@ -30,9 +30,10 @@ define(function(require, exports, module){
 					name:"商品1"
 				}
 			];
-			$.each(data,function(item,index){
-				console.log(item,index);
+			$.each(data,function(index,item){
+				item.price=item.price*20;
 			});
+			console.log(data);
 		}
 	};
 	index.init();
