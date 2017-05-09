@@ -1,6 +1,10 @@
 (function(){
 	var jsV=document.getElementsByTagName("script");
 	var v=jsV[0].getAttribute("src").split("?")[1];
+	var staticGlobalPathEle=document.getElementById("staticGlobalPathEle");
+	if(staticGlobalPathEle.length>0){
+		var staticGlobalPath=
+	}
 	seajs.config({
 		paths: {
 		  'globalPath': 'https://185389903.github.io/demo/static/dist/js'
