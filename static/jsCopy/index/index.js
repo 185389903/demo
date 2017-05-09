@@ -21,6 +21,18 @@ define(function(require, exports, module){
 				// jquery插件异步加载完毕后可以直接使用
 				$.cookie("name","txp");
 			});
+			var data=[
+				{
+					price:10,
+					name:"商品1"
+				},{
+					price:20,
+					name:"商品1"
+				}
+			];
+			$.each(data,function(item,index){
+				console.log(item,index);
+			});
 		}
 	};
 	index.init();
