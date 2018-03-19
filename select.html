@@ -42,6 +42,7 @@ new Vue({
     'defaultVal' : function (curVal,oldVal) {
       var _this = this;
 	    if (curVal == '请选择') {
+		    _this.xhData = '请选择';
 		    return;
 	    }
       console.log(curVal + '**---')//改变后的值
@@ -54,6 +55,10 @@ new Vue({
       }
     },
     'xhData' : function (curVal,oldVal) {
+	    if (curVal == '请选择') {
+		    _this.defaultVal = '请选择';
+		    return;
+	    }
       //第二个下拉框改变值的时候自动触发这个回调，curVal是改变后的值
       console.log(curVal + '**')//改变后的值
     }
