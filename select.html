@@ -55,6 +55,7 @@ new Vue({
       }
     },
     'xhData' : function (curVal,oldVal) {
+	    var _this = this;
 	    if (curVal == '请选择') {
 		    _this.defaultVal = '请选择';
 		    return;
