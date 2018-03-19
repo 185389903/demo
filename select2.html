@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue入门学习</title>
+</head>
+<body>
+<script type="text/javascript" src="./vue.min.js"></script>
+<div id="app">
+<select v-model="defaultVal">
+  <option value="请选择">请选择</option>
+  <option v-for="item in [{code:'A',name:'A汤'},{code:'B',name:'B兴'},{code:'C',name:'C平'}]"  v-bind:value="item.code">{{item.name}}</option>
+</select>
+<select v-model="xhData">
+  <option value="请选择">请选择</option>
+  <option v-for="y in treeData" v-bind:value="y.code">{{y.name}}</option>
+</select>
+</div>
+<script>
+new Vue({
+	el: '#app',
+	components: {
+	},
+  data:function(){
+    return {
+      defaultVal: 'A',
+      tree: {
+        'A' : [
+          {code:'A1',name:'A1汤'},{code:'A2',name:'A2兴'},{code:'A3',name:'A3平'}
+        ],
+        'B' : [
+          {code:'B1',name:'B1汤'},{code:'B2',name:'B2兴'},{code:'B3',name:'B3平'}
+        ],
+        'C' : [
+          {code:'C1',name:'C1汤'},{code:'C2',name:'C2兴'},{code:'C3',name:'C3平'}
+        ] 
+      },
+      treeData:[{code:'A1',name:'A1汤'},{code:'A2',name:'A2兴'},{code:'A3',name:'A3平'}],
+      xhData:'A1'
+    }
+  },
+  watch: {
+    'defaultVal' : function (curVal,oldVal) {
+      var _this = this;
+      if (curVal == '请选择') {
+      	return;
+      }
+      _this.getData(curVal,function (res) {
+      			_this.treeData = res;
+		      // for (var i in _this.tree) {
+		      //   if (curVal == i) {
+		      //     console.log(i,'++1111')
+		      //     _this.treeData = _this.tree[i]//取到和第一个下拉框对应的系列，遍历tree对象，赋值给第二个下拉框绑定的treeData，自动渲染，
+		      //     _this.xhData = _this.treeData[0].name//找到之后
+		      //   }
+		      // }
+      })
+    },
+    'xhData' : function (curVal,oldVal) {
+      //第二个下拉框改变值的时候自动触发这个回调，curVal是改变后的值
+      console.log(curVal + '**')//改变后的值
+    }
+  },
+  methods: {
+  	getData: function (code,callback) {
+  		var res = [
+			{code:'',name:'请选择'},
+			{code:'a',name:'道夫'},
+			{code:'b',name:'发'},
+			{code:'c',name:'发发'},
+			{code:'d',name:'请选阿斯蒂芬择'}
+		];
+  		callback(res);
+  	}
+  }
+})
+</script>
+</body>
+</html>
