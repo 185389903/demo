@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue入门学习</title>
+</head>
+<body>
+<script type="text/javascript" src="./vue.js"></script>
+<div id="app">
+<select v-model="defaultVal">
+  <option v-for="item in [{name:'A',text:'A汤'},{name:'B',text:'B兴'},{name:'C',text:'C平'}]"  v-bind:value="item.name">{{item.text}}</option>
+</select>
+<select v-model="xhData">
+  <option v-for="y in treeData" v-bind:value="y.name">{{y.text}}</option>
+</select>
+</div>
+<script>
+new Vue({
+	el: '#app',
+	components: {
+	},
+  data:function(){
+    return {
+      defaultVal: 'A',
+      tree: {
+        'A' : [
+          {name:'A1',text:'A1汤'},{name:'A2',text:'A2兴'},{name:'A3',text:'A3平'}
+        ],
+        'B' : [
+          {name:'B1',text:'B1汤'},{name:'B2',text:'B2兴'},{name:'B3',text:'B3平'}
+        ],
+        'C' : [
+          {name:'C1',text:'C1汤'},{name:'C2',text:'C2兴'},{name:'C3',text:'C3平'}
+        ] 
+      },
+      treeData:[{name:'A1',text:'A1汤'},{name:'A2',text:'A2兴'},{name:'A3',text:'A3平'}],
+      xhData:'A1'
+    }
+  },
+  watch: {
+    'defaultVal' : function (curVal,oldVal) {
+      var _this = this;
+      console.log(curVal + '**---')//改变后的值
+      for (var i in _this.tree) {
+        if (curVal == i) {
+          console.log(i,'++1111')
+          _this.treeData = _this.tree[i]//取到和第一个下拉框对应的系列，遍历tree对象，赋值给第二个下拉框绑定的treeData，自动渲染，
+          _this.xhData = _this.treeData[0].name//找到之后
+        }
+      }
+    },
+    'xhData' : function (curVal,oldVal) {
+      //第二个下拉框改变值的时候自动触发这个回调，curVal是改变后的值
+      console.log(curVal + '**')//改变后的值
+    }
+  }
+})
+</script>
+</body>
+</html>
