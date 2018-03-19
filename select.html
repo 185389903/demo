@@ -7,9 +7,11 @@
 <script type="text/javascript" src="./vue.js"></script>
 <div id="app">
 <select v-model="defaultVal">
+	<option value="请选择">请选择 </option>
   <option v-for="item in [{name:'A',text:'A汤'},{name:'B',text:'B兴'},{name:'C',text:'C平'}]"  v-bind:value="item.name">{{item.text}}</option>
 </select>
 <select v-model="xhData">
+	<option value="请选择">请选择 </option>
   <option v-for="y in treeData" v-bind:value="y.name">{{y.text}}</option>
 </select>
 </div>
@@ -20,7 +22,7 @@ new Vue({
 	},
   data:function(){
     return {
-      defaultVal: 'A',
+      defaultVal: '请选择',
       tree: {
         'A' : [
           {name:'A1',text:'A1汤'},{name:'A2',text:'A2兴'},{name:'A3',text:'A3平'}
@@ -33,12 +35,15 @@ new Vue({
         ] 
       },
       treeData:[{name:'A1',text:'A1汤'},{name:'A2',text:'A2兴'},{name:'A3',text:'A3平'}],
-      xhData:'A1'
+      xhData:'请选择'
     }
   },
   watch: {
     'defaultVal' : function (curVal,oldVal) {
       var _this = this;
+	    if (curVal == '请选择') {
+		    return;
+	    }
       console.log(curVal + '**---')//改变后的值
       for (var i in _this.tree) {
         if (curVal == i) {
